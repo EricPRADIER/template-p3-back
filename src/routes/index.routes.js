@@ -1,6 +1,8 @@
 const router = require('express').Router();
-const adminRouter = require('./admin.routes.js');
+const songRouter = require('./song.routes.js');
+const albumRouter = require('./album.routes.js');
 
-router.use('/admins', adminRouter);
+router.use('/song', songRouter);
+router.use('/album', albumRouter);
 
 module.exports = router;
