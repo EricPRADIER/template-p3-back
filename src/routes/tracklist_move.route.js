@@ -1,12 +1,14 @@
+const app = require('../app');
 const {connection} = require('../db_connection');
 const router = require('express').Router();
-router.use(express.json());
+
 
 //création d'album
 
-router.post('/', (req, res) => {
+router.post('/album', (req, res) => {
+  const {title, genre, picture, artist}= req.body;
     const sql = "INSERT INTO albums(title, genre, picture, artist) VALUES(?, ?, ?, ?)";
-    connection.query(sql, [title, genre, year, picture, artist], (err, res) => {
+    connection.query(sql, [title, genre, picture, artist], (err, results) => {
       if (err) {
         res.status(500).send("Error to create album");
       } else {
@@ -14,6 +16,7 @@ router.post('/', (req, res) => {
       }
     });
   });
+  
 //affichage d'album
 
   router.get("/:id", (req, response) => {
@@ -30,6 +33,7 @@ router.post('/', (req, res) => {
 
 //Musique affilier a un album à sa création 
   router.post('/track', (req, res) => {
+    const {title, youtube_url, id_album} = req.body;
     const sql = "INSERT INTO track (title, youtube_url, id_album) VALUES(?, ?, ?)";
     connection.query(sql, [title, youtube_url, id_album], (err, res) => {
       if (err) {
@@ -112,3 +116,5 @@ router.put("/track/change/:id", (req, response) => {
     }
   );
 });
+
+module.exports = router;
