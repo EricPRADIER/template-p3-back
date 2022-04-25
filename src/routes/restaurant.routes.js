@@ -122,4 +122,4 @@ router.delete('/:id', (req, res) => {
 
 // on exporte ici notre router du thème en question
 // pour pouvoir le lire sur l'index.routes.js
-module.exports = router;
+module.exports = router; 
